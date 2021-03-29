@@ -12,10 +12,9 @@ services:
     volumes:
       - nginx_secrets:/etc/letsencrypt
       - /var/www/html/:/var/www/html/:ro
-    links:
-      - php
   php:
     image: php:7-fpm
+    restart: always
     volumes:
       - /var/www/html/:/var/www/html/:ro
 volumes:
