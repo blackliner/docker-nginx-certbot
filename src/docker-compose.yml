@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  nginx:
+    build: .
+    restart: always
+    environment:
+      - CERTBOT_EMAIL=florian.berchtold@gmail.com
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - /var/www/html/:/var/www/html/:ro
+    links:
+      - php
+  php:
+    image: php:7-fpm
+    volumes:
+      - /var/www/html/:/var/www/html/:ro
+volumes:
+  nginx_secrets:
